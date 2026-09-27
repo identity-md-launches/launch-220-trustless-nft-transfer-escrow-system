@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="A direct, exact-terms NFT swap between two wallets. Escrow your NFTs and settle in one atomic transaction.">
+  <title>Pairwise · A fair exchange</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header><a class="brand" href="./"><span class="mark">⇄</span> pairwise</a><span class="tag">TWO WALLETS. ONE AGREEMENT.</span><a href="#how">How it works ↗</a></header>
+  <main>
+    <section class="intro"><div class="eyebrow"><span class="dot"></span> DIRECT NFT EXCHANGE</div><h1>Your NFTs.<br>Your exact terms.</h1><p>Make a deal with someone you know. Lock your NFTs, share the offer, and exchange only when both sides match.</p><div class="features"><span>↗ One atomic swap</span><span>◷ 30-minute window</span><span>◎ No platform fee</span></div></section>
+    <section class="connection panel" aria-labelledby="connection-title"><div class="section-title"><h2 id="connection-title">Connect to your escrow</h2><span id="network-status" class="pill">Not connected</span></div><p id="deployment-status" class="muted">Loading deployment configuration…</p><fieldset id="connection-fields"><div class="connection-grid"><label>Chain ID<input id="chain" inputmode="numeric" value="11155111" required></label><label>Verified escrow address<input id="contract" placeholder="0x…" spellcheck="false" autocomplete="off" required></label><button id="connect" type="button">Connect wallet ↗</button></div></fieldset><p id="account" class="mono muted">Use an Ethereum browser wallet. Never enter a private key.</p></section>
+    <div class="workspace">
+      <section class="panel compose" aria-labelledby="create-title"><div class="section-title"><div><div class="eyebrow">01 / MAKE AN OFFER</div><h2 id="create-title">Set the exchange.</h2></div><span class="pill">Sender</span></div>
+        <fieldset id="create-fields"><label>Receiver wallet<input id="taker" placeholder="0x… the only wallet that can accept" spellcheck="false" autocomplete="off"></label>
+        <div class="basket-head"><h3>You send</h3><span>ERC-721 NFTs</span></div><div id="offered" class="assets"></div><button class="text-button" id="add-offered" type="button">＋ Add NFT</button>
+        <div class="exchange-divider">⇅</div><div class="basket-head"><h3>You receive</h3><span>Exact consideration</span></div><div id="requested" class="assets"></div><button class="text-button" id="add-requested" type="button">＋ Add asset</button>
+        <p class="hint">ERC-20 amounts use whole <strong>minor units</strong>: 1 token with 18 decimals = 1000000000000000000. Native ETH is not supported; use a wrapped ERC-20. Verify token addresses with your counterparty.</p>
+        <label class="check"><input type="checkbox" id="confirm-create">I checked the receiver, collection addresses, token IDs, and exact payment amounts.</label><button id="create" class="primary wide" type="button" disabled>Approve NFTs & create escrow ↗</button><p class="hint">Your wallet signs each required approval and the offer. The 30 minutes start when the offer is mined. You can cancel until it is filled.</p></fieldset>
+      </section>
+      <section class="panel review" aria-labelledby="review-title"><div class="section-title"><div><div class="eyebrow">02 / REVIEW & EXCHANGE</div><h2 id="review-title">Meet in the middle.</h2></div><span class="pill">Receiver / Sender</span></div>
+        <fieldset id="load-fields"><label>Offer creation transaction<input id="creation-tx" placeholder="0x… transaction hash" spellcheck="false" autocomplete="off"></label><button id="load" class="secondary wide" type="button" disabled>Load & verify offer</button></fieldset>
+        <div id="empty-offer" class="empty"><span>⇄</span><h3>A clear agreement, together.</h3><p>Create an offer or paste its creation transaction. Every asset and the receiver are checked against the contract before you can settle.</p></div>
+        <div id="offer" hidden><div class="offer-heading"><h3 id="offer-title"></h3><span class="pill" id="offer-status"></span></div><p class="countdown" id="countdown"></p><dl><dt>Sender</dt><dd id="offer-maker"></dd><dt>Receiver</dt><dd id="offer-taker"></dd><dt>Expires at</dt><dd id="offer-expiry"></dd></dl><h3>Sender gives</h3><ul id="offer-offered" class="review-assets"></ul><h3>Receiver gives</h3><ul id="offer-requested" class="review-assets"></ul><p class="hint">Terms are fixed. A failed settlement transfers nothing. Wallet approvals remain until used or revoked.</p><fieldset id="action-fields"><label class="check"><input type="checkbox" id="confirm-fill">I verified both baskets and the counterparty.</label><button id="fill" class="primary wide" type="button" disabled>Approve payment & settle swap ↗</button><button id="cancel" class="secondary wide" type="button" disabled>Cancel & reclaim my NFTs</button><button id="refresh" class="text-button" type="button">Refresh on-chain status</button><label>Share this verified offer<input id="share" readonly></label><button id="copy" class="text-button" type="button">Copy offer link</button></fieldset></div>
+      </section>
+    </div>
+    <section class="feedback" aria-label="Transaction progress"><span class="dot"></span><p id="message" role="status" aria-live="polite">Ready when you are. Connect a wallet to begin.</p></section>
+    <section class="saved panel"><h2>Your recent offers</h2><p class="hint">Saved on this device. Keep the creation transaction hash so either party can recover the terms from its receipt.</p><ul id="history"></ul></section>
+    <section id="how" class="how"><div><span>01</span><h3>Commit your terms</h3><p>Choose one receiver and the exact assets. Your NFTs stay in escrow until settlement or your cancellation.</p></div><div><span>02</span><h3>Verify together</h3><p>Share the offer. The receiver checks the full addresses, token IDs, amounts, and deadline before signing.</p></div><div><span>03</span><h3>Exchange atomically</h3><p>Everything moves together, or nothing moves. After 30 minutes the offer cannot be filled; the sender reclaims it.</p></div></section>
+  </main><footer><span class="brand">⇄ pairwise</span><p>No administrator. No custody fees. Token contracts and network availability still matter.</p></footer>
+  <template id="asset-template"><div class="asset"><div class="asset-top"><select class="kind" aria-label="Asset standard"><option value="0">ERC-721 NFT</option><option value="1">ERC-20 token</option></select><button class="remove" type="button" aria-label="Remove asset">×</button></div><label>Token contract address<input class="token" placeholder="0x…" spellcheck="false" autocomplete="off"></label><label class="value-label"><span>Token ID</span><input class="value" placeholder="0" inputmode="numeric" autocomplete="off"></label></div></template>
+</body>
+</html>

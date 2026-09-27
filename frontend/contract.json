@@ -1,0 +1,542 @@
+{
+  "abi": [
+    {
+      "type": "function",
+      "name": "MAX_ASSETS",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "OFFER_LIFETIME",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "cancelOffer",
+      "inputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "offered",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "name": "requested",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "createOffer",
+      "inputs": [
+        {
+          "name": "taker",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "offered",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "name": "requested",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "fillOffer",
+      "inputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "offered",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "name": "requested",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "hashTerms",
+      "inputs": [
+        {
+          "name": "offered",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "name": "requested",
+          "type": "tuple[]",
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "nextOfferId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "offers",
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "maker",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "expiresAt",
+          "type": "uint64",
+          "internalType": "uint64"
+        },
+        {
+          "name": "status",
+          "type": "uint8",
+          "internalType": "enum NFTSwap.Status"
+        },
+        {
+          "name": "taker",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "termsHash",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "OfferCancelled",
+      "inputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "OfferCreated",
+      "inputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "maker",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "taker",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "expiresAt",
+          "type": "uint64",
+          "indexed": false,
+          "internalType": "uint64"
+        },
+        {
+          "name": "termsHash",
+          "type": "bytes32",
+          "indexed": false,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "offered",
+          "type": "tuple[]",
+          "indexed": false,
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "name": "requested",
+          "type": "tuple[]",
+          "indexed": false,
+          "internalType": "struct NFTSwap.Asset[]",
+          "components": [
+            {
+              "name": "kind",
+              "type": "uint8",
+              "internalType": "enum NFTSwap.Kind"
+            },
+            {
+              "name": "token",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "OfferFilled",
+      "inputs": [
+        {
+          "name": "offerId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "DuplicateAsset",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "Expired",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InexactPayment",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidAsset",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidBasketSize",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidCounterparty",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotMaker",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotOpen",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotTaker",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "Reentrancy",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "TermsMismatch",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "TokenTransferFailed",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "WrongOwner",
+      "inputs": []
+    }
+  ],
+  "runtimeHash": "0xc26e19eb1da192fd220c1d6d06796d62c05e843bd4877c79c36f07d9f733efb0"
+}
