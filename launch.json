@@ -1,0 +1,22 @@
+{
+  "kind": "evm_project",
+  "token": {
+    "contract": "Token",
+    "name": "Pairwise",
+    "symbol": "PAIR",
+    "decimals": 18
+  },
+  "contracts": [
+    {
+      "contract": "NFTSwap",
+      "constructorArgs": []
+    }
+  ],
+  "pool": {
+    "pairedCurrency": "0x0000000000000000000000000000000000000000",
+    "fee": 3000,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "notes": "Pairwise: a trustless, private-counterparty NFT escrow. Token (src/Token.sol) is the fixed-supply launch ERC-20: name Pairwise, symbol PAIR, 18 decimals, exactly 1,000,000,000 tokens (10^27 minor units) minted to msg.sender (the ProjectFactory) in its constructor. It has no constructor arguments, owner, mint, pause, fee, proxy or admin path; totalSupply, name, symbol and decimals are compile-time constants. NFTSwap (src/NFTSwap.sol) is the single application contract. It has no constructor arguments and no constructor body: nextOfferId starts at 1 and the reentrancy lock is initialised inline. It has no owner, fee, pause, upgrade, rescue or arbitrary-call facility, so $owner and $token are intentionally not referenced; the factory's launch supply cannot be moved by it. Behaviour: a maker calls createOffer(receiver, offered[], requested[]) naming one receiver, 1-16 ERC-721s to escrow (collection address + token ID) and 1-16 requested assets (ERC-721 as collection + ID, or ERC-20 as token address + minor-unit amount). Offered NFTs move into escrow immediately and the offer stores only maker, receiver, absolute expiry (creation block timestamp + 30 minutes) and keccak256(abi.encode(offered, requested)); full terms are emitted in OfferCreated. Only the named receiver can call fillOffer(id, offered, requested) with byte-exact arrays, before expiry, with zero ETH; anything added, omitted or altered reverts. Settlement is atomic: all requested assets move receiver->maker and all escrowed NFTs move to the receiver in one transaction, with before/after ownership and exact ERC-20 balance-delta checks. At or after expiry the fill reverts; the maker reclaims escrowed NFTs with cancelOffer(id, offered, requested), which is also allowed while open. Offer IDs never repeat and closed offers cannot be reopened. All entry points share a reentrancy lock and close the offer before external interactions. Unsolicited safe-transfers and ETH sends revert. Compiler: solc 0.8.26, optimizer 200 runs, evm_version cancun, bytecode_hash none, cbor_metadata false; forge-std is vendored in lib/. Pool: paired against native ETH on Sepolia with fee 3000, tickSpacing 60, initialPrice given as sqrtPriceX96 for a 1:1 legacy default; the deployer derives the effective opening price from the pinned policy (initialMarketCapWei) when present. No hook. Frontend: static site under frontend/ (ethers vendored) that verifies the deployed NFTSwap runtime hash; frontend/config.json is set to the deployed address after launch via scripts/configure-frontend.mjs."
+}
